@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #20002c, #cbb4d4);
+            margin: 0;
+            color: white;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            grid-template-columns: 200px 1fr;
+            height: 100vh;
+        }
+
+        header {
+            grid-column: span 2;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 20px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .small-chart {
+            width: 200px;  /* Adjust the width as needed */
+            height: 200px;  /* Adjust the height as needed */
+            margin: 0 auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Analysis Dashboard</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#">Analytics</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section class="card">
+                <h2>Popular Post Time</h2>
+                <canvas id="chart1"></canvas>
+            </section>
+            <section class="card">
+                <h2>Engagement</h2>
+                <canvas id="chart2"></canvas>
+            </section>
+            <section class="card">
+                <h2>Profile Visits</h2>
+                <h3>Monthly</h3>
+                <canvas id="chart3" class="small-chart"></canvas>
+            </section>
+        </main>
+    </div>
+    <script>
+        window.onload = function() {
+            var ctx1 = document.getElementById('chart1').getContext('2d');
+            var chart1 = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                    datasets: [{
+                        label: 'no. of posts',
+                        data: [6, 0, 2, 3, 5, 1, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var ctx2 = document.getElementById('chart2').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                    datasets: [{
+                        label: 'As Posts',
+                        data: [300, 0, 40, 70, 120, 24, 56],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var ctx3 = document.getElementById('chart3').getContext('2d');
+            var chart3 = new Chart(ctx3, {
+                type: 'pie',
+                data: {
+                    labels: ['Non-Followers', 'Followers', 'From Reels'],
+                    datasets: [{
+                        label: 'Visits',
+                        data: [143, 198, 33],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+        };
+    </script>
+</body>
+</html>
